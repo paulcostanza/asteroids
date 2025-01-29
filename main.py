@@ -6,6 +6,10 @@ def main():
     screen = p.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT)) # creates the screen size
     game_is_running = True
 
+    # changing the fps to save CPU power
+    clock = p.time.Clock()
+    dt = 0
+
     # game loop
     while game_is_running:
 
@@ -17,6 +21,8 @@ def main():
 
         p.Surface.fill(screen, (0,0,0))
         p.display.flip()
+
+        dt = clock.tick(60) / 1000
 
 
     print("Starting asteroids!")
