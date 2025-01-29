@@ -1,0 +1,3 @@
+# files that can be regenerated
+venv/
+__pycache__/
