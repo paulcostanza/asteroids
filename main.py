@@ -24,6 +24,9 @@ def main():
         ######
 
         p.Surface.fill(screen, (0,0,0))
+
+        # reads user's input
+        player_1.update(dt)
         player_1.draw(screen)
         p.display.flip()
 
