@@ -20,8 +20,14 @@ class Player(CircleShape):
     def draw(self, screen):
         p.draw.polygon(screen, (255,255,255), self.triangle(), 2)
 
+    # left and right
     def rotate(self, dt):
         self.rotation += PLAYER_TURN_SPEED * dt
+
+    # forward and reverse
+    def move(self, dt):
+        forward = p.Vector2(0, 1).rotate(self.rotation)
+        self.position += forward * PLAYER_SPEED * dt
 
     def update(self, dt):
         keys = p.key.get_pressed()
@@ -39,3 +45,18 @@ class Player(CircleShape):
         
         if keys[p.K_RIGHT]:
             self.rotate(dt)
+
+        # foward
+        if keys[p.K_UP]:
+            self.move(dt)
+
+        if keys[p.K_w]:
+            self.move(dt)
+
+        # backwards
+        if keys[p.K_s]:
+            self.move(dt * -1)
+
+        if keys[p.K_DOWN]:
+            self.move(dt * -1)
+    
