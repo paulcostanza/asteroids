@@ -52,6 +52,11 @@ def main():
             if asteroid.collision_detection(player_1):
                 raise SystemExit("G A M E O V E R")
 
+            for shot in shots:
+                if asteroid.collision_detection(shot):
+                    shot.kill()
+                    asteroid.split()
+
         for obj in drawable:
             obj.draw(screen)
         p.display.flip()
