@@ -1,11 +1,13 @@
 import pygame as p
 from  circleshape import CircleShape
 from constants import *
+from shoot import Shoot
 
 class Player(CircleShape):
     def __init__(self, x, y):
         super().__init__(x, y, PLAYER_RADIUS)
         self.rotation = 0
+        self.timer = 0
 
     # player is a triangle
     # but there hitbox is a circle
@@ -29,8 +31,10 @@ class Player(CircleShape):
         forward = p.Vector2(0, 1).rotate(self.rotation)
         self.position += forward * PLAYER_SPEED * dt
 
+    # listen to user input
     def update(self, dt):
         keys = p.key.get_pressed()
+        self.timer -= dt
 
         # left
         if keys[p.K_a]:
@@ -59,4 +63,13 @@ class Player(CircleShape):
 
         if keys[p.K_DOWN]:
             self.move(dt * -1)
+
+        # shoot
+        if keys[p.K_SPACE]:
+            self.shoot()
     
+    def shoot(self):
+        if self.timer <= 0:
+            shot = Shoot(self.position.x, self.position.y)
+            shot.velocity = p.Vector2(0,1).rotate(self.rotation) * PLAYER_SHOOT_SPEED
+            self.timer = PLAYER_SHOOT_COOLDOWN
