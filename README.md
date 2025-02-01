@@ -15,4 +15,4 @@ python3 -m venv venv
 source venv/bin/activate
 ```
 
-The run the <code>main</code> file. 
+Then run the <code>main</code> file. 
